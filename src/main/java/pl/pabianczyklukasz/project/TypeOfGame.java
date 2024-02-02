@@ -4,5 +4,6 @@ public enum TypeOfGame {
     STRATEGIC,
     RACING,
     MUSICAL,
+    ACTION,
     SIMULATION;
 }
