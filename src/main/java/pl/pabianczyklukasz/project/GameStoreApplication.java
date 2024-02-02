@@ -12,5 +12,4 @@ public class GameStoreApplication {
 
 		System.out.println(game1);
 	}
-
 }
