@@ -42,10 +42,24 @@ public class ListBasedGameRepository implements GameRepository{
     }
 
     @Override
-    public boolean isThisGameInRepository(Game game) {
-        if(games.contains(game)) {
-            return true;
+    public boolean doesThisGameExist(Game game) {
+        return games.contains(game);
+        //metoda contains uzywa kontraktu hashcode i equals.
+        //to znaczy, ze klasa tzn. typ tego obiektu powinien nadpisywać hashcode i equals.
+
+    }
+
+    public Game findGameByPublisher(Publisher publisher) throws IllegalArgumentException{
+        for (Game game : games) {
+            if (game.getPublisher().equals(publisher)) {
+                return game;
+            }
         }
-        throw new IllegalArgumentException("Nie ma takiej gry w repozytorium!");
+//        return null; bo nie powinnismy zwracac nigdy nulla, bo może rzucic nullPointerException
+     //   return null;
+     throw new IllegalArgumentException("Nie ma gier z takim wydawcą: " + publisher.getName());
+        //jesli metoda zwraca nulla, a my uzyjemy tej metody, wyciagniemy jej wynik do zmiennej neie wiedzac ze ona zwraca nulla
+        //to wtedy gdy na tej zmiennewj wywolamy jakas metode to poleci nPE
+        //return Game.builder().build();
     }
 }

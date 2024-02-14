@@ -1,14 +1,13 @@
 package pl.pabianczyklukasz.project;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @Getter
 @ToString
 @Setter
+@Builder
+@EqualsAndHashCode
 public class Game {
     private String title;
     private int yearOfRelease;

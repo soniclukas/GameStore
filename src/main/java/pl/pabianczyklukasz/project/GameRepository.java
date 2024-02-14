@@ -8,5 +8,6 @@ public interface GameRepository {
     public void addGame(Game gameToBeAdded);
     public void removeGame(Game gameToBeRemoved);
     public Game updateGame(String oldName, String newName, Game game);
-    public boolean isThisGameInRepository(Game game);
+    public boolean doesThisGameExist(Game game);
+    public Game findGameByPublisher(Publisher publisher);
 }
