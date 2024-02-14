@@ -13,7 +13,12 @@ public class ListBasedGameRepository implements GameRepository{
 
     @Override
     public Game findGameByName(String name) {
-        return null;
+        for(Game game : games) {
+            if(game.getTitle().equals(name)) {
+                return game;
+            }
+        }
+        throw new IllegalArgumentException("Nie ma gry o takiej nazwie " + name);
     }
 
     @Override
@@ -27,7 +32,20 @@ public class ListBasedGameRepository implements GameRepository{
     }
 
     @Override
-    public Game updateGame(Game game) {
-        return game;
+    public Game updateGame(String oldName, String newName, Game game) {
+       if (findGameByName(oldName) != null && !game.getTitle().equals(newName)){
+            game.setTitle(newName);
+       } else {
+           throw new IllegalArgumentException("Już istnieje taka nazwa gry!");
+       }
+       return game;
+    }
+
+    @Override
+    public boolean isThisGameInRepository(Game game) {
+        if(games.contains(game)) {
+            return true;
+        }
+        throw new IllegalArgumentException("Nie ma takiej gry w repozytorium!");
     }
 }
