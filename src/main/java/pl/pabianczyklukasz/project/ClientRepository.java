@@ -1,2 +1,4 @@
-package pl.pabianczyklukasz.project;public interface ClientRepository {
+package pl.pabianczyklukasz.project;
+
+public interface ClientRepository {
 }

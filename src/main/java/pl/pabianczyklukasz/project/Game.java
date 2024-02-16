@@ -13,6 +13,4 @@ public class Game {
     private int yearOfRelease;
     private Publisher publisher;
     private TypeOfGame typeOfGame;
-
-
 }
