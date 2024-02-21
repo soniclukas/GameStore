@@ -52,6 +52,7 @@ GameRepository gamesRepository = new ListBasedGameRepository();
 		Store store = new Store("Juhu", new Address(1,2), clients);
 		store.updateClient("Lukasz", "Pabianczyk", "Nikodem", "Nowak", client);
 
+
 		System.out.println(store.readAllClients());
 	}
 }
