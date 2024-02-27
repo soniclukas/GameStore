@@ -49,7 +49,7 @@ public class Store {
         throw new IllegalArgumentException("Nie ma klienta o takim imieniu " + name);
     }
 
-    public boolean DoesThisClientExist(Client client) {
+    public boolean doesThisClientExist(Client client) {
         return clients.contains(client);
     }
 }

@@ -2,6 +2,8 @@ package pl.pabianczyklukasz.project;
 
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 
 public class Employee {
@@ -20,12 +22,12 @@ public class Employee {
        gameRepository.updateGame(oldName, newName, game);
    }
 
-   public void findGameByName(String name) {
-       System.out.println(gameRepository.findGameByName(name));
+   public Game findGameByName(String name) {
+       return gameRepository.findGameByName(name);
    }
 
-   public void readAllGames(GameRepository gameRepository) {
-       System.out.println(gameRepository.readAllGames());
+   public List<Game> readAllGames(GameRepository gameRepository) {
+       return gameRepository.readAllGames();
    }
 
 
