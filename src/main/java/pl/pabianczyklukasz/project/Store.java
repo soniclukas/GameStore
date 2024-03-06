@@ -21,11 +21,13 @@ public class Store {
         return clients;
     }
 
-    public void updateClient(String oldName, String oldSurname, String newName, String newSurname, Client client) {
-        if(findClientByName(oldName) != null && !client.getName().equals(newName) && findClientBySurname(oldSurname) != null &&
-        !client.getSurname().equals(newSurname)) {
-            client.setName(newName);
-            client.setSurname(newSurname);
+    public void updateClient(String oldName, String oldSurname, String newName, String newSurname) {
+        Client clientByName = findClientByName(oldName);
+        Client clientBySurname = findClientBySurname(oldSurname);
+        if(clientByName != null && !clientByName.getName().equals(newName)
+                && clientBySurname != null && !clientBySurname.getSurname().equals(newSurname)) {
+            clientByName.setName(newName);
+            clientBySurname.setSurname(newSurname);
         } else {
             throw new IllegalArgumentException("Osoba o takim imieniu i nazwisku już istnieje!");
         }

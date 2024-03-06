@@ -15,11 +15,11 @@ public class Employee {
    }
 
    public void addGame(Game game) {
-       gameRepository.addGame(game);
+       //gameRepository.addGame(game);
    }
 
-   public void updateGame(String oldName, String newName, Game game) {
-       gameRepository.updateGame(oldName, newName, game);
+   public void updateGame(String oldName, String newName) {
+       gameRepository.updateGame(oldName, newName);
    }
 
    public Game findGameByName(String name) {
