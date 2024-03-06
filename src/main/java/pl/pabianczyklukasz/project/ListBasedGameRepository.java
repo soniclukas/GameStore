@@ -1,5 +1,9 @@
 package pl.pabianczyklukasz.project;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +28,17 @@ public class ListBasedGameRepository implements GameRepository{
     @Override
     public void addGame(Game gameToBeAdded) {
         games.add(gameToBeAdded);
+        String file = "/Users/lukas/ideaprojects/gamestore/project/games";
+        try(PrintWriter writer = new PrintWriter(file)) {
+            writer.println("Tytuł gry: " + gameToBeAdded.getTitle());
+            writer.println("Data premiery: " + gameToBeAdded.getYearOfRelease());
+            writer.println("Wydawca: "+ gameToBeAdded.getPublisher().getName());
+            writer.println("Gatunek: "+gameToBeAdded.getTypeOfGame());
+
+            System.out.println("Obiekt został zapisany do pliku " + file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -32,13 +47,14 @@ public class ListBasedGameRepository implements GameRepository{
     }
 
     @Override
-    public Game updateGame(String oldName, String newName, Game game) {
-       if (findGameByName(oldName) != null && !game.getTitle().equals(newName)){
-            game.setTitle(newName);
+    public Game updateGame(String oldName, String newName) {
+        Game gameByName = findGameByName(oldName);
+        if (gameByName != null && !gameByName.getTitle().equals(newName)){
+            gameByName.setTitle(newName);
        } else {
            throw new IllegalArgumentException("Już istnieje taka nazwa gry!");
        }
-       return game;
+       return gameByName;
     }
 
     @Override
