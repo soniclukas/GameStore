@@ -13,12 +13,11 @@ public class FileBasedGameRepository implements GameRepository {
   @Override
   public List<Game> readAllGames() {
     try {
-      List<String> file = Files.readAllLines(Paths.get(FILE_NAME));
-      file.forEach(System.out::println);
+      List<String> allLinesInFile = Files.readAllLines(Paths.get(FILE_NAME));
+      allLinesInFile.forEach(System.out::println);
     } catch (IOException e) {
       e.printStackTrace();
     }
-
     return null;
   }
 
