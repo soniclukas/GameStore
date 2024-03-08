@@ -1,18 +1,25 @@
 package pl.pabianczyklukasz.project;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import org.springframework.data.jpa.domain.AbstractAuditable_;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListBasedGameRepository implements GameRepository{
     private List<Game> games = new ArrayList<>();
 
     @Override
-    public List<Game> readAllGames() {
-        return games;
+    public void readAllGames() {
+        try {
+            List<String> file = Files.readAllLines(Paths.get("/Users/lukas/IdeaProjects/GameStore/project/src/main/java/pl/pabianczyklukasz/project/games.csv"));
+            file.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -28,13 +35,12 @@ public class ListBasedGameRepository implements GameRepository{
     @Override
     public void addGame(Game gameToBeAdded) {
         games.add(gameToBeAdded);
-        String file = "/Users/lukas/ideaprojects/gamestore/project/games";
-        try(PrintWriter writer = new PrintWriter(file)) {
-            writer.println("Tytuł gry: " + gameToBeAdded.getTitle());
-            writer.println("Data premiery: " + gameToBeAdded.getYearOfRelease());
-            writer.println("Wydawca: "+ gameToBeAdded.getPublisher().getName());
-            writer.println("Gatunek: "+gameToBeAdded.getTypeOfGame());
-
+        String file = "/Users/lukas/IdeaProjects/GameStore/project/src/main/java/pl/pabianczyklukasz/project/games.csv";
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for(Game game : games) {
+                    writer.write(String.valueOf(game));
+                    writer.newLine();
+                }
             System.out.println("Obiekt został zapisany do pliku " + file);
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,6 +71,7 @@ public class ListBasedGameRepository implements GameRepository{
 
     }
 
+    @Override
     public Game findGameByPublisher(Publisher publisher) throws IllegalArgumentException{
         for (Game game : games) {
             if (game.getPublisher().equals(publisher)) {

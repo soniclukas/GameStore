@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface GameRepository {
-    public List<Game> readAllGames();
+    public void readAllGames();
     public Game findGameByName(String name);
     public void addGame(Game gameToBeAdded) throws IOException;
     public void removeGame(Game gameToBeRemoved);
