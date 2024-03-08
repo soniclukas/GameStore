@@ -1,14 +1,12 @@
 package pl.pabianczyklukasz.project.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Builder
 public class Publisher {
     private String name;
 }
