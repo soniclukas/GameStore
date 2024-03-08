@@ -1,11 +1,11 @@
 package pl.pabianczyklukasz.project;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import pl.pabianczyklukasz.project.domain.Game;
+import pl.pabianczyklukasz.project.domain.Publisher;
+import pl.pabianczyklukasz.project.domain.TypeOfGame;
+import pl.pabianczyklukasz.project.repositories.GameRepository;
+import pl.pabianczyklukasz.project.repositories.ListBasedGameRepository;
 
 //@SpringBootApplication
 public class GameStoreApplication {

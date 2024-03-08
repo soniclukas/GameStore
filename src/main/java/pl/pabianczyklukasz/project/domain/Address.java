@@ -1,4 +1,4 @@
-package pl.pabianczyklukasz.project;
+package pl.pabianczyklukasz.project.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.ToString;

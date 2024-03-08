@@ -1,15 +1,16 @@
-package pl.pabianczyklukasz.project;
+package pl.pabianczyklukasz.project.repositories;
 
-import org.springframework.data.jpa.domain.AbstractAuditable_;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import pl.pabianczyklukasz.project.domain.Game;
+import pl.pabianczyklukasz.project.domain.Publisher;
 
-public class ListBasedGameRepository implements GameRepository{
+public class ListBasedGameRepository implements GameRepository {
     private List<Game> games = new ArrayList<>();
 
     @Override
