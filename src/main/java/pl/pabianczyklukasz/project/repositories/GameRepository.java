@@ -1,7 +1,9 @@
-package pl.pabianczyklukasz.project;
+package pl.pabianczyklukasz.project.repositories;
 
 import java.io.IOException;
 import java.util.List;
+import pl.pabianczyklukasz.project.domain.Game;
+import pl.pabianczyklukasz.project.domain.Publisher;
 
 public interface GameRepository {
     public List<Game> readAllGames();

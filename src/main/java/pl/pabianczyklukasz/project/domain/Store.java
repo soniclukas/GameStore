@@ -1,8 +1,7 @@
-package pl.pabianczyklukasz.project;
-
-import lombok.AllArgsConstructor;
+package pl.pabianczyklukasz.project.domain;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Store {
     private String name;

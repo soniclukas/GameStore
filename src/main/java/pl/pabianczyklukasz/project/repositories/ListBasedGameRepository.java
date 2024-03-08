@@ -1,13 +1,11 @@
-package pl.pabianczyklukasz.project;
+package pl.pabianczyklukasz.project.repositories;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import pl.pabianczyklukasz.project.domain.Game;
+import pl.pabianczyklukasz.project.domain.Publisher;
 
-public class ListBasedGameRepository implements GameRepository{
+public class ListBasedGameRepository implements GameRepository {
     private List<Game> games = new ArrayList<>();
 
     @Override
@@ -28,17 +26,6 @@ public class ListBasedGameRepository implements GameRepository{
     @Override
     public void addGame(Game gameToBeAdded) {
         games.add(gameToBeAdded);
-        String file = "/Users/lukas/ideaprojects/gamestore/project/games";
-        try(PrintWriter writer = new PrintWriter(file)) {
-            writer.println("Tytuł gry: " + gameToBeAdded.getTitle());
-            writer.println("Data premiery: " + gameToBeAdded.getYearOfRelease());
-            writer.println("Wydawca: "+ gameToBeAdded.getPublisher().getName());
-            writer.println("Gatunek: "+gameToBeAdded.getTypeOfGame());
-
-            System.out.println("Obiekt został zapisany do pliku " + file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -65,6 +52,7 @@ public class ListBasedGameRepository implements GameRepository{
 
     }
 
+    @Override
     public Game findGameByPublisher(Publisher publisher) throws IllegalArgumentException{
         for (Game game : games) {
             if (game.getPublisher().equals(publisher)) {
