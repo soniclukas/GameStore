@@ -1,10 +1,5 @@
 package pl.pabianczyklukasz.project.repositories;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import pl.pabianczyklukasz.project.domain.Game;
@@ -14,13 +9,8 @@ public class ListBasedGameRepository implements GameRepository {
     private List<Game> games = new ArrayList<>();
 
     @Override
-    public void readAllGames() {
-        try {
-            List<String> file = Files.readAllLines(Paths.get("/Users/lukas/IdeaProjects/GameStore/project/src/main/java/pl/pabianczyklukasz/project/games.csv"));
-            file.forEach(System.out::println);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public List<Game> readAllGames() {
+        return games;
     }
 
     @Override
@@ -36,16 +26,6 @@ public class ListBasedGameRepository implements GameRepository {
     @Override
     public void addGame(Game gameToBeAdded) {
         games.add(gameToBeAdded);
-        String file = "/Users/lukas/IdeaProjects/GameStore/project/src/main/java/pl/pabianczyklukasz/project/games.csv";
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                for(Game game : games) {
-                    writer.write(String.valueOf(game));
-                    writer.newLine();
-                }
-            System.out.println("Obiekt został zapisany do pliku " + file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
