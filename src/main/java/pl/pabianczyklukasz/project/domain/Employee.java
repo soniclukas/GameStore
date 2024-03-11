@@ -22,7 +22,7 @@ public class Employee {
        gameRepository.updateGame(oldName, newName);
    }
 
-   public Game findGameByName(String name) {
+   public Game findGameByName(String name) throws Exception {
        return gameRepository.findGameByName(name);
    }
 
