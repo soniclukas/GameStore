@@ -15,7 +15,7 @@ public class Employee {
    }
 
    public void addGame(Game game) {
-       //gameRepository.addGame(game);
+       gameRepository.addGame(game);
    }
 
    public void updateGame(String oldName, String newName) {
