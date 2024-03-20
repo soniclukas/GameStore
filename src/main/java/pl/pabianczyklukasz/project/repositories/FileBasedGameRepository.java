@@ -73,8 +73,8 @@ public class FileBasedGameRepository implements GameRepository {
 
     @Override
     public void removeGame(Game gameToBeRemoved) {
-        List<String> allLinesInFile;
         try {
+            List<String> allLinesInFile;
             allLinesInFile = Files.readAllLines(Paths.get(FILE_NAME));
 
             Iterator<String> iterator = allLinesInFile.iterator();
