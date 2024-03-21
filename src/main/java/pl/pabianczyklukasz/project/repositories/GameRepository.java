@@ -7,7 +7,7 @@ import pl.pabianczyklukasz.project.domain.Publisher;
 
 public interface GameRepository {
     public List<Game> readAllGames();
-    public Game findGameByName(String name);
+    public Game findGameByName(String name) throws Exception;
     public void addGame(Game gameToBeAdded) throws IOException;
     public void removeGame(Game gameToBeRemoved);
     public Game updateGame(String oldName, String newName);
