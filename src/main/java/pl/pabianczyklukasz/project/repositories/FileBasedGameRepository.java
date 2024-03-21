@@ -94,7 +94,21 @@ public class FileBasedGameRepository implements GameRepository {
 
     @Override
     public Game updateGame(String oldName, String newName) {
-        return null;
+        var gameByName = findGameByName(oldName);
+        try {
+            List<String> allLinesInFile = Files.readAllLines(Paths.get(FILE_NAME));
+
+            for(int i = 0; i < allLinesInFile.size(); i++) {
+                String[] gameInfo = allLinesInFile.get(i).split(",");
+                if(gameInfo[0].equals(gameByName.getTitle())){
+                    gameByName.setTitle(newName);
+                }
+            }
+            Files.write(Paths.get(FILE_NAME), allLinesInFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return gameByName;
     }
 
     @Override
