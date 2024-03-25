@@ -26,7 +26,7 @@ public class GameStoreApplication {
 		gameRepository.addGame(game2);
 		gameRepository.removeGame(game2);
 		gameRepository.addGame(game3);
-		System.out.println(gameRepository.readAllGames());
+		gameRepository.updateGame("Rocket Balls", "Cars");
 
 	}
 }
