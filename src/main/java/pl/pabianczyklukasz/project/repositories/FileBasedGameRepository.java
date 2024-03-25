@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
 
 import pl.pabianczyklukasz.project.domain.Game;
 import pl.pabianczyklukasz.project.domain.Publisher;
@@ -57,13 +57,15 @@ public class FileBasedGameRepository implements GameRepository {
 
     @Override
     public void addGame(Game gameToBeAdded) {
+        var game = String.format("%s,%d,%s,%s%n",
+                gameToBeAdded.getTitle(),
+                gameToBeAdded.getYearOfRelease(),
+                gameToBeAdded.getPublisher().getName(),
+                gameToBeAdded.getTypeOfGame());
         try (BufferedWriter bf = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            var game = String.format("%s,%d,%s,%s%n",
-                    gameToBeAdded.getTitle(),
-                    gameToBeAdded.getYearOfRelease(),
-                    gameToBeAdded.getPublisher().getName(),
-                    gameToBeAdded.getTypeOfGame());
-            bf.write(game);
+            if(!doesThisGameExist(gameToBeAdded)) {
+                bf.write(game);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,8 +73,23 @@ public class FileBasedGameRepository implements GameRepository {
 
     @Override
     public void removeGame(Game gameToBeRemoved) {
-        List<Game> games = readAllGames();
-        games.remove(gameToBeRemoved);
+        try {
+            List<String> allLinesInFile;
+            allLinesInFile = Files.readAllLines(Paths.get(FILE_NAME));
+
+            Iterator<String> iterator = allLinesInFile.iterator();
+            while (iterator.hasNext()) {
+                String element = iterator.next();
+                String[] gameInfo = element.split(",");
+                String title = gameInfo[0];
+                if (title.equals(gameToBeRemoved.getTitle())) {
+                    iterator.remove();
+                }
+            }
+            Files.write(Paths.get(FILE_NAME), allLinesInFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -80,14 +97,12 @@ public class FileBasedGameRepository implements GameRepository {
         return null;
     }
 
-
     @Override
     public boolean doesThisGameExist(Game game) {
         List<Game> games = readAllGames();
         return games.contains(game);
     }
 
-    @Override
     public Game findGameByPublisher(Publisher publisher) {
         List<Game> listGames = readAllGames();
         for (Game game : listGames) {
