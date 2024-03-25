@@ -27,17 +27,22 @@ public class FileBasedGameRepository implements GameRepository {
         }
         for (String line : allLinesInFile) {
             String[] gamesElements = line.split(","); //line.split(",");
-            Game game = Game.builder()
-                    .title(gamesElements[0])
-                    .yearOfRelease(Integer.parseInt(gamesElements[1]))
-                    .publisher(Publisher.builder()
-                            .name(gamesElements[2])
-                            .build())
-                    .typeOfGame(TypeOfGame.valueOf(gamesElements[3]))
-                    .build();
+            Game game = createGame(gamesElements);
             listGames.add(game);
         }
         return listGames;
+    }
+
+    private static Game createGame(String[] gamesElements) {
+        Game game = Game.builder()
+                .title(gamesElements[0])
+                .yearOfRelease(Integer.parseInt(gamesElements[1]))
+                .publisher(Publisher.builder()
+                        .name(gamesElements[2])
+                        .build())
+                .typeOfGame(TypeOfGame.valueOf(gamesElements[3]))
+                .build();
+        return game;
     }
 
     @Override
@@ -101,7 +106,7 @@ public class FileBasedGameRepository implements GameRepository {
             for(int i = 0; i < allLinesInFile.size(); i++) {
                 String[] gameInfo = allLinesInFile.get(i).split(",");
                 if(gameInfo[0].equals(gameByName.getTitle())){
-                    gameByName.setTitle(newName);
+                   allLinesInFile.set(i, createGameWithNewTitle(newName, gameInfo));
                 }
             }
             Files.write(Paths.get(FILE_NAME), allLinesInFile);
@@ -109,6 +114,10 @@ public class FileBasedGameRepository implements GameRepository {
             e.printStackTrace();
         }
         return gameByName;
+    }
+
+    private static String createGameWithNewTitle(String newName, String[] gameInfo) {
+        return newName + "," + gameInfo[1] + "," + gameInfo[2] + "," + gameInfo[3];
     }
 
     @Override
