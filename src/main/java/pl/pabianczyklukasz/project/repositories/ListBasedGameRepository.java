@@ -6,7 +6,7 @@ import pl.pabianczyklukasz.project.domain.Game;
 import pl.pabianczyklukasz.project.domain.Publisher;
 
 public class ListBasedGameRepository implements GameRepository {
-    private List<Game> games = new ArrayList<>();
+    private final List<Game> games = new ArrayList<>();
 
     @Override
     public List<Game> readAllGames() {
