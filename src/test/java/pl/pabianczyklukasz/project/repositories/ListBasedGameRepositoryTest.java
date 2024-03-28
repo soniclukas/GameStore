@@ -59,7 +59,7 @@ class ListBasedGameRepositoryTest {
         repository.addGame(new Game("Sims", 2010, new Publisher("EA"), TypeOfGame.SIMULATION));
         repository.addGame(new Game("Fifa 12", 2011, new Publisher("EA"), TypeOfGame.SIMULATION));
         //When
-        Boolean existenceOfTheGame = repository.doesThisGameExist(
+        boolean existenceOfTheGame = repository.doesThisGameExist(
                 new Game("Fifa 12", 2011, new Publisher("EA"), TypeOfGame.SIMULATION));
         //Then
         assertTrue( existenceOfTheGame);
